@@ -1,7 +1,30 @@
-# React + Vite
+# React Firebase Auth Demo - GDSC Kabarak
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introduction
+This repository contains a demo project for an introduction to React JS authentication using Firebase. It was created for the GDSC Kabarak event.
 
-Currently, two official plugins are available:
+## Repository Structure
+- **public/**: Contains static files for the project.
+- **src/**: Contains the source code for the demo.
+- **.eslintrc.cjs**: ESLint configuration file.
+- **.gitignore**: Git ignore file.
+- **README.md**: README file for the project.
+- **index.html**: Main HTML file for the project.
+- **package-lock.json**: Lock file for npm dependencies.
+- **package.json**: npm package file.
+- **postcss.config.js**: PostCSS configuration file.
+- **tailwind.config.js**: Tailwind CSS configuration file.
+- **vite.config.js**: Vite configuration file.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresshing 
+## Setup Instructions
+1. Clone the repository: `git clone https://github.com/Blackie360/react-firebase-auth-demo-GDSC-Kabarak.git`
+2. Navigate to the project directory: `cd react-firebase-auth-demo-GDSC-Kabarak`
+3. Install dependencies: `npm install`
+4. Start the development server: `npm run dev`
+
+## Usage
+This demo showcases how to implement authentication in a React JS application using Firebase. It covers user sign-up, sign-in, and sign-out functionalities.
+
+## Credits
+- **Author**: Blackie360
+- **GDSC Kabarak**: For organizing the event and providing the opportunity to present this demo.
