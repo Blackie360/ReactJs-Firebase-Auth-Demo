@@ -1,5 +1,7 @@
 
 import './App.css';
+import Forgetpassword from './component/Forgetpassword';
+import { Login } from './component/Login';
 import Signup from './component/Signup';
 import Booking from './pages/Booking';
 import Hero from './pages/Hero';
@@ -13,6 +15,8 @@ function App() {
           <Route path="/" element={<Hero />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/booking" element={<Booking />} />
+          <Route path= "/login" element={<Login />} />
+          <Route path="//reset-password" element={<Forgetpassword />} />
         </Routes>
       </main>
     </Router>
