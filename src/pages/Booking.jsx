@@ -1,12 +1,22 @@
-
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Booking() {
   const name = localStorage.getItem('name');
   const email = localStorage.getItem('email');
   const profilePic = localStorage.getItem('profilePic');
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <div className="flex justify-end mb-4">
+        <button onClick={handleLogout} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Logout</button>
+      </div>
       <h1 className="text-3xl font-bold mb-4">Book an Appointment</h1>
       <div className="flex items-center mb-4">
         <img src={profilePic} alt="Profile" className="w-12 h-12 rounded-full mr-4" />
