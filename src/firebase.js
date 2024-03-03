@@ -1,36 +1,30 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAPHBj6m6n1jmSX9uD_4U-DcwH4kSVA6PU",
-    authDomain: "fir-bb8ea.firebaseapp.com",
-    projectId: "fir-bb8ea",
-    storageBucket: "fir-bb8ea.appspot.com",
-    messagingSenderId: "816797204987",
-    appId: "1:816797204987:web:973b090f26303275e10b5e"
-  };
+  apiKey: "AIzaSyD3rBYuzeSLOOdRzLOqUjkLwn8nnetggxU",
+  authDomain: "auth-333bc.firebaseapp.com",
+  projectId: "auth-333bc",
+  storageBucket: "auth-333bc.appspot.com",
+  messagingSenderId: "905826499291",
+  appId: "1:905826499291:web:d1fdea4db605b9e9162afe"
+};
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-const provider = new GoogleAuthProvider();
-export const signInWithGoogle = () => {
-    return new Promise((resolve, reject) => {
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          const name = result.user.displayName;
-          const email = result.user.email;
-          const profilePic = result.user.photoURL;
-  
-          localStorage.setItem("name", name);
-          localStorage.setItem("email", email);
-          localStorage.setItem("profilePic", profilePic);
-          resolve(); // Resolve the promise after storing data
-        })
-        .catch((error) => {
-          console.log(error);
-          reject(error); // Reject the promise if there's an error
-        });
-    });
-  };
-  
+// Function to create an account with email and password
+export const createAccountWithEmailPassword = (email, password) => {
+  return new Promise((resolve, reject) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        // You can add additional actions here if needed
+        resolve(user); // Resolve the promise after creating the account
+      })
+      .catch((error) => {
+        console.log(error);
+        reject(error); // Reject the promise if there's an error
+      });
+  });
+};
