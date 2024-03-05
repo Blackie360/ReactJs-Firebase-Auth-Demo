@@ -7,7 +7,7 @@ This repository contains a demo project for an introduction to React JS authenti
 - **public/**: Contains static files for the project.
 - **src/**: Contains the source code for the demo.
 - **.eslintrc.cjs**: ESLint configuration file.
-- **.gitignore**: Git ignore file.
+
 - **README.md**: README file for the project.
 - **index.html**: Main HTML file for the project.
 - **package-lock.json**: Lock file for npm dependencies.
