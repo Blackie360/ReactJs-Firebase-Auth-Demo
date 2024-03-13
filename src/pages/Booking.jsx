@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 function Booking() {
-  const name = localStorage.getItem('name');
-  const email = localStorage.getItem('email');
-  const profilePic = localStorage.getItem('profilePic');
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        navigate('/login');
+      }
+    });
+    return () => unsubscribe();
+  }, [navigate]);
+
   const handleLogout = () => {
-    localStorage.clear();
-    navigate('/login');
+    const auth = getAuth();
+    auth.signOut().then(() => {
+      navigate('/login');
+    });
   };
 
   return (
@@ -18,13 +31,15 @@ function Booking() {
         <button onClick={handleLogout} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Logout</button>
       </div>
       <h1 className="text-3xl font-bold mb-4">Book an Appointment</h1>
-      <div className="flex items-center mb-4">
-        <img src={profilePic} alt="Profile" className="w-12 h-12 rounded-full mr-4" />
-        <div>
-          <p className="text-xl font-bold">{name}</p>
-          <p className="text-gray-500">{email}</p>
+      {user && (
+        <div className="flex items-center mb-4">
+          <img src={user.photoURL} alt="Profile" className="w-12 h-12 rounded-full mr-4" />
+          <div>
+            <p className="text-xl font-bold">{user.displayName}</p>
+            <p className="text-gray-500">{user.email}</p>
+          </div>
         </div>
-      </div>
+      )}
       <form className="max-w-lg mx-auto">
         <div className="mb-4">
           <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date</label>

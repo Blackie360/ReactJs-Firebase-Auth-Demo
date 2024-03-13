@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { createAccountWithEmailPassword } from '../firebase';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { createAccountWithEmailPassword, signUpWithGoogle } from '../firebase';
+import { useNavigate } from 'react-router-dom'; 
 
 function Signup() {
-  const navigate = useNavigate(); // Initialize navigate function
+  const navigate = useNavigate(); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -12,6 +12,17 @@ function Signup() {
     createAccountWithEmailPassword(email, password)
       .then(() => {
         // Redirect to the login page
+        navigate('/login');
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
+
+  const handleSignUpWithGoogle = () => {
+    signUpWithGoogle()
+      .then(() => {
+        // Redirect to the login page 
         navigate('/login');
       })
       .catch((error) => {
@@ -46,14 +57,16 @@ function Signup() {
           >
             Sign up
           </button>
-         
+          <button
+            onClick={handleSignUpWithGoogle}
+            className="w-64 inline-flex items-center px-4 py-2 mt-2 bg-red-500 hover:bg-red-700 text-white font-bold rounded focus:outline-none focus:shadow-outline"
+          >
+            Sign up with Google
+          </button>
           {error && <p className="text-red-500 mt-2">{error}</p>}
-
           <div className="text-center mt-4">
-  <p className="text-gray-400">Already have an account? <span className="text-blue-500 cursor-pointer" onClick={() => navigate('/login')}>Login</span></p>
-</div>
-
-
+            <p className="text-gray-400">Already have an account? <span className="text-blue-500 cursor-pointer" onClick={() => navigate('/login')}>Login</span></p>
+          </div>
         </div>
       </div>
     </div>
