@@ -18,7 +18,6 @@ export const Login = () => {
       .then(() => {
         // Signed in with email and password
       
-      
         navigate('/booking');
       })
       .catch((error) => {

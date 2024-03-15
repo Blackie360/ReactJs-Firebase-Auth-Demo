@@ -9,10 +9,11 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
+   // sign in with email&password
   const handleSignUpWithEmailPassword = () => {
     createAccountWithEmailPassword(email, password)
       .then(() => {
-        // Redirect to the login page
+       
         navigate('/login');
       })
       .catch((error) => {
@@ -20,6 +21,7 @@ function Signup() {
       });
   };
 
+  // sign in with google
   const handleSignUpWithGoogle = () => {
     signUpWithGoogle()
       .then(() => {
