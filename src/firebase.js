@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCktxb6A2yfD24phw2X8SuqKbvMExTsXzE",
   authDomain: "kabaxmmmustxegerton.firebaseapp.com",
@@ -12,6 +13,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+const githubProvider = new GithubAuthProvider();
 
 // Function to create an account with email and password
 export const createAccountWithEmailPassword = (email, password) => {
@@ -37,6 +39,21 @@ export const signUpWithGoogle = () => {
       .then((result) => {
         const user = result.user;
         resolve(user); // Resolve the promise after signing up with Google
+      })
+      .catch((error) => {
+        console.log(error);
+        reject(error); // Reject the promise if there's an error
+      });
+  });
+};
+
+// Function to sign up with GitHub
+export const signUpWithGithub = () => {
+  return new Promise((resolve, reject) => {
+    signInWithPopup(auth, githubProvider)
+      .then((result) => {
+        const user = result.user;
+        resolve(user); // Resolve the promise after signing up with GitHub
       })
       .catch((error) => {
         console.log(error);

@@ -1,50 +1,62 @@
-import  { useState } from 'react';
+
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from 'firebase/auth';
 import { auth } from '../firebase';
 import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
-import { FaGoogle } from 'react-icons/fa'; 
+import { FaGoogle, FaGithub } from 'react-icons/fa'; 
+
 
 export const Login = () => {
+  
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
 
+  // Function to handle email and password login
   const handleLoginWithEmailPassword = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        // Signed in with email and password
-      
         navigate('/booking');
       })
       .catch((error) => {
-        // Handle errors here
         setError(error.message);
       });
   };
 
+  // Function to handle Google login
   const handleGoogleLogin = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then(() => {
-        // Signed in with Google
-        
-        
         navigate('/booking');
       })
       .catch((error) => {
-        // Handle errors here
         setError(error.message);
       });
   };
 
+  // Function to handle GitHub login
+  const handleGithubLogin = () => {
+    const provider = new GithubAuthProvider();
+    signInWithPopup(auth, provider)
+      .then(() => {
+        navigate('/booking');
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
+
+  // Function to toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
 
+  
   return (
     <div className="h-screen flex justify-center items-center bg-gray-900">
       <div className="bg-white p-8 rounded shadow-md w-80">
@@ -70,6 +82,12 @@ export const Login = () => {
           className="w-full bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600 mt-4 flex justify-center items-center"
         >
           <FaGoogle className="mr-2" /> Sign in with Google
+        </button>
+        <button
+          onClick={handleGithubLogin}
+          className="w-full bg-gray-800 text-white px-4 py-2 rounded-md hover:bg-gray-900 focus:outline-none focus:bg-gray-900 mt-2 flex justify-center items-center"
+        >
+          <FaGithub className="mr-2" /> Sign in with GitHub
         </button>
         {error && <p className="text-red-500 mt-4">{error}</p>}
         <div className="mt-4 text-center">
