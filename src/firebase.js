@@ -1,16 +1,19 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD3rBYuzeSLOOdRzLOqUjkLwn8nnetggxU",
-  authDomain: "auth-333bc.firebaseapp.com",
-  projectId: "auth-333bc",
-  storageBucket: "auth-333bc.appspot.com",
-  messagingSenderId: "905826499291",
-  appId: "1:905826499291:web:d1fdea4db605b9e9162afe"
+  apiKey: "AIzaSyCktxb6A2yfD24phw2X8SuqKbvMExTsXzE",
+  authDomain: "kabaxmmmustxegerton.firebaseapp.com",
+  projectId: "kabaxmmmustxegerton",
+  storageBucket: "kabaxmmmustxegerton.appspot.com",
+  messagingSenderId: "799302295258",
+  appId: "1:799302295258:web:43459a71081007ef99cfe3",
+  measurementId: "G-52LNT1RPD3"
 };
+
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+const githubProvider = new GithubAuthProvider();
 
 // Function to create an account with email and password
 export const createAccountWithEmailPassword = (email, password) => {
@@ -36,6 +39,21 @@ export const signUpWithGoogle = () => {
       .then((result) => {
         const user = result.user;
         resolve(user); // Resolve the promise after signing up with Google
+      })
+      .catch((error) => {
+        console.log(error);
+        reject(error); // Reject the promise if there's an error
+      });
+  });
+};
+
+// Function to sign up with GitHub
+export const signUpWithGithub = () => {
+  return new Promise((resolve, reject) => {
+    signInWithPopup(auth, githubProvider)
+      .then((result) => {
+        const user = result.user;
+        resolve(user); // Resolve the promise after signing up with GitHub
       })
       .catch((error) => {
         console.log(error);

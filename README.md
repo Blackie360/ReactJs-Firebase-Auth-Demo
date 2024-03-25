@@ -28,3 +28,4 @@ This demo showcases how to implement authentication in a React JS application us
 ## Credits
 - **Author**: Blackie360
 - **GDSC Kabarak**: For organizing the event and providing the opportunity to present this demo.
+- **WTM Pwani**: for organizing IWD event
