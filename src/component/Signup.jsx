@@ -64,7 +64,7 @@ function Signup() {
             onClick={handleSignUpWithGoogle}
             className="w-64 inline-flex items-center px-4 py-2 mt-2 bg-red-500 hover:bg-red-700 text-white font-bold rounded focus:outline-none focus:shadow-outline"
           >
-            <FaGoogle className="mr-2" />  Sign in with Google
+            <FaGoogle className="mr-2" /> 
           </button>
           {error && <p className="text-red-500 mt-2">{error}</p>}
           <div className="text-center mt-4">
